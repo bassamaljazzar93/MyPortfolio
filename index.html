@@ -524,3 +524,20 @@ function lb(frame) {
   const img = frame.querySelector('img');
   if (!img) return;
   document.getElementById('lbImg').src = img.src;
+  document.getElementById('lb').classList.add('show');
+}
+
+// Email
+function sendMail() {
+  var u = 'b_aljazzar';
+  var d = 'yahoo.com';
+  window.location.href = 'mailto:' + u + '@' + d;
+}
+
+const glow = document.querySelector('.hero-glow');
+window.addEventListener('scroll', () => {
+  if (glow) glow.style.transform = `translateX(-50%) translateY(${window.scrollY*.25}px)`;
+},{passive:true});
+</script>
+</body>
+</html>
