@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bassam Aljazzar — Innovation Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#04070d;--ink:#07101a;--surface:#0d1520;--card:#111d2e;--border:#1a2a40;--accent:#00d4aa;--gold:#f5a623;--sky:#38bdf8;--purple:#c084fc;--text:#e2eaf5;--muted:#5a7a9a;--syne:'Syne',sans-serif;--arabic:'IBM Plex Sans Arabic',sans-serif;--mono:'JetBrains Mono',monospace;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--syne);overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:14px 36px;background:rgba(4,7,13,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.04);}
+.nav-logo{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:3px;}
+.nav-links{display:flex;gap:22px;}
+.nav-links a{font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--accent);}
+.nav-right{display:flex;gap:10px;align-items:center;}
+.lang-toggle{padding:7px 16px;border:1px solid var(--border);border-radius:6px;background:var(--card);color:var(--text);font-family:var(--mono);font-size:11px;cursor:pointer;transition:all .2s;}
+.lang-toggle:hover{border-color:var(--accent);color:var(--accent);}
+.nav-cta{padding:8px 18px;border:1px solid var(--accent);border-radius:4px;color:var(--accent);font-size:11px;letter-spacing:2px;text-decoration:none;text-transform:uppercase;transition:all .2s;}
+.nav-cta:hover{background:var(--accent);color:#000;}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 40px 80px;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,170,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,170,.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent);}
+.hero-glow{position:absolute;top:20%;left:50%;transform:translateX(-50%);width:700px;height:300px;background:radial-gradient(ellipse,rgba(0,212,170,.1) 0%,transparent 70%);pointer-events:none;}
+.hero-eyebrow{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:4px;text-transform:uppercase;margin-bottom:24px;}
+.hero-name{font-size:clamp(50px,9vw,108px);font-weight:800;line-height:1;background:linear-gradient(135deg,#fff 0%,var(--accent) 55%,var(--sky) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;}
+.hero-title{font-size:clamp(13px,1.8vw,17px);color:var(--muted);letter-spacing:1px;margin-bottom:56px;line-height:1.7;}
+.hero-stats{display:flex;gap:44px;justify-content:center;flex-wrap:wrap;margin-bottom:64px;}
+.stat{text-align:center;}
+.stat-num{font-size:40px;font-weight:800;color:var(--accent);font-family:var(--mono);line-height:1;}
+.stat-label{font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:6px;}
+.hero-scroll{display:flex;flex-direction:column;align-items:center;gap:8px;}
+.scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--accent),transparent);animation:sp 2s infinite;}
+@keyframes sp{0%,100%{opacity:.3}50%{opacity:1}}
+.scroll-text{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;}
+.section-inner{max-width:1100px;margin:0 auto;padding:100px 40px;}
+.section-eyebrow{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:4px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.section-eyebrow::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--border),transparent);}
+.section-heading{font-size:clamp(30px,5vw,54px);font-weight:800;line-height:1.1;margin-bottom:56px;}
+.timeline{position:relative;padding-right:48px;}
+.timeline::before{content:'';position:absolute;right:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,var(--accent) 15%,var(--border) 50%,var(--accent) 85%,transparent);}
+.era{position:relative;margin-bottom:80px;opacity:0;transform:translateX(-24px);transition:opacity .8s ease,transform .8s ease;}
+.era.visible{opacity:1;transform:translateX(0);}
+.era-dot{position:absolute;right:-57px;top:6px;width:22px;height:22px;border-radius:50%;background:var(--accent);box-shadow:0 0 24px rgba(0,212,170,.6);display:flex;align-items:center;justify-content:center;}
+.era-dot::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--bg);}
+.era-year{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:3px;margin-bottom:8px;}
+.era-title{font-size:28px;font-weight:800;margin-bottom:6px;}
+.era-sub{font-size:13px;color:var(--muted);margin-bottom:18px;font-family:var(--arabic);}
+.era-text{font-size:15px;color:var(--text);line-height:1.85;font-family:var(--arabic);margin-bottom:22px;max-width:660px;}
+.img-frame{border-radius:12px;overflow:hidden;border:1px solid var(--border);background:var(--card);position:relative;transition:border-color .3s,transform .3s;}
+.img-frame:hover{border-color:rgba(0,212,170,.35);transform:scale(1.01);}
+.img-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+.img-single{aspect-ratio:16/9;margin-bottom:12px;cursor:pointer;}
+.img-2col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.img-2col .img-frame{aspect-ratio:4/3;cursor:pointer;}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+.tag{padding:5px 14px;border-radius:100px;font-size:12px;font-family:var(--arabic);}
+.tg{background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.2);color:var(--accent);}
+.tgo{background:rgba(245,166,35,.07);border:1px solid rgba(245,166,35,.2);color:var(--gold);}
+.tsk{background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.2);color:var(--sky);}
+.tpu{background:rgba(192,132,252,.07);border:1px solid rgba(192,132,252,.2);color:var(--purple);}
+.t10-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
+.t10-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease,border-color .3s;}
+.t10-card.visible{opacity:1;transform:translateY(0);}
+.t10-card:hover{border-color:rgba(0,212,170,.35);transform:translateY(-3px);}
+.t10-img{aspect-ratio:16/9;overflow:hidden;background:var(--surface);position:relative;}
+.t10-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.t10-body{padding:16px;}
+.t10-id{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:1.5px;margin-bottom:6px;}
+.t10-name{font-size:15px;font-weight:700;margin-bottom:8px;}
+.t10-desc{font-size:12px;color:var(--muted);line-height:1.7;font-family:var(--arabic);}
+.t10-link{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--accent);text-decoration:none;}
+.t10-link:hover{text-decoration:underline;}
+.pilot-badge{display:inline-block;padding:3px 10px;border-radius:20px;background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);font-family:var(--mono);font-size:9px;color:var(--accent);letter-spacing:1px;margin-bottom:8px;}
+.certs-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px;}
+.cert-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease,border-color .3s;cursor:pointer;}
+.cert-card.visible{opacity:1;transform:translateY(0);}
+.cert-card:hover{border-color:var(--gold);}
+.cert-img{aspect-ratio:3/4;overflow:hidden;background:var(--surface);}
+.cert-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.cert-body{padding:14px;}
+.cert-title{font-size:13px;font-weight:700;margin-bottom:6px;margin-top:6px;}
+.cert-desc{font-size:11px;color:var(--muted);line-height:1.7;font-family:var(--arabic);}
+.exh-logos{display:flex;gap:28px;align-items:center;flex-wrap:wrap;padding:22px 24px;background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:28px;}
+.exh-logos img{height:60px;object-fit:contain;filter:brightness(1.1);}
+.exh-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;}
+.exh-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease,border-color .3s;}
+.exh-card.visible{opacity:1;transform:translateY(0);}
+.exh-card:hover{border-color:var(--gold);}
+.exh-card.upcoming{border-color:rgba(0,212,170,.3);}
+.exh-year-block{min-width:50px;text-align:center;padding:8px 6px;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);border-radius:8px;}
+.exh-year-num{font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);line-height:1;}
+.exh-month{font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:3px;}
+.exh-card.upcoming .exh-year-block{background:rgba(0,212,170,.08);border-color:rgba(0,212,170,.25);}
+.exh-card.upcoming .exh-year-num{color:var(--accent);}
+.exh-name{font-size:14px;font-weight:700;margin-bottom:4px;}
+.exh-venue{font-size:11px;color:var(--muted);margin-bottom:4px;font-family:var(--mono);}
+.exh-desc{font-size:12px;color:var(--muted);line-height:1.6;font-family:var(--arabic);}
+.contact-grid{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+.contact-card{display:flex;align-items:center;gap:12px;padding:14px 20px;background:var(--card);border:1px solid var(--border);border-radius:12px;text-decoration:none;color:var(--text);transition:border-color .2s,transform .2s;min-width:190px;}
+.contact-card:hover{transform:translateY(-2px);}
+.cc-g:hover{border-color:var(--accent);}
+.cc-s:hover{border-color:var(--sky);}
+.cc-o:hover{border-color:var(--gold);}
+.cc-p:hover{border-color:var(--purple);}
+.contact-lbl{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:2px;margin-bottom:2px;}
+.contact-val{font-size:13px;}
+#lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:9000;align-items:center;justify-content:center;cursor:pointer;}
+#lb.show{display:flex;}
+#lbImg{max-width:92vw;max-height:90vh;object-fit:contain;border-radius:10px;}
+@media(max-width:640px){
+  nav{padding:12px 18px;} .nav-links{display:none;} .section-inner{padding:60px 18px;} .hero-stats{gap:24px;} .stat-num{font-size:28px;} .timeline{padding-right:28px;} .era-dot{right:-37px;} .img-2col,.certs-grid{grid-template-columns:1fr;}
+}
+html[dir="rtl"] .timeline{padding-right:0;padding-left:48px;}
+html[dir="rtl"] .timeline::before{right:auto;left:0;}
+html[dir="rtl"] .era-dot{right:auto;left:-57px;}
+html[dir="rtl"] .era{transform:translateX(24px);}
+html[dir="rtl"] .era.visible{transform:translateX(0);}
+html[dir="rtl"] .section-eyebrow::after{background:linear-gradient(to left,var(--border),transparent);}
+@media(max-width:640px){html[dir="rtl"] .timeline{padding-left:28px;} html[dir="rtl"] .era-dot{left:-37px;}}
+
+.hero-photo-wrap {
+  position: relative;
+  margin-bottom: 28px;
+  display: inline-block;
+}
+.hero-photo {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 0 6px rgba(0,212,170,.12), 0 0 40px rgba(0,212,170,.25);
+  display: block;
+  position: relative; z-index: 1;
+}
+.hero-photo-ring {
+  position: absolute; inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,212,170,.2);
+  animation: ringPulse 3s ease infinite;
+}
+.hero-photo-ring2 {
+  position: absolute; inset: -16px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,212,170,.08);
+  animation: ringPulse 3s ease 1s infinite;
+}
+@keyframes ringPulse {
+  0%,100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.04); opacity: 0.6; }
+}
+
+</style>
+
+<style id="visibility-fix">
+/* Force all content visible - override opacity:0 initial states */
+.era, .t10-card, .exh-card, .cert-card {
+  opacity: 1 !important;
+  transform: none !important;
+}
+/* Re-add scroll animation via JS class only */
+.era.animate-ready { opacity: 0; transform: translateX(-24px); transition: opacity .8s ease, transform .8s ease; }
+.era.animate-ready.visible { opacity: 1 !important; transform: translateX(0) !important; }
+html[dir="rtl"] .era.animate-ready { transform: translateX(24px); }
+html[dir="rtl"] .era.animate-ready.visible { transform: translateX(0) !important; }
+
+.t10-card.animate-ready { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease, border-color .3s; }
+.t10-card.animate-ready.visible { opacity: 1 !important; transform: translateY(0) !important; }
+
+.exh-card.animate-ready { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease, border-color .3s; }
+.exh-card.animate-ready.visible { opacity: 1 !important; transform: translateY(0) !important; }
+
+.cert-card.animate-ready { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease, border-color .3s; }
+.cert-card.animate-ready.visible { opacity: 1 !important; transform: translateY(0) !important; }
+
+.hero-photo-wrap {
+  position: relative;
+  margin-bottom: 28px;
+  display: inline-block;
+}
+.hero-photo {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 0 6px rgba(0,212,170,.12), 0 0 40px rgba(0,212,170,.25);
+  display: block;
+  position: relative; z-index: 1;
+}
+.hero-photo-ring {
+  position: absolute; inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,212,170,.2);
+  animation: ringPulse 3s ease infinite;
+}
+.hero-photo-ring2 {
+  position: absolute; inset: -16px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,212,170,.08);
+  animation: ringPulse 3s ease 1s infinite;
+}
+@keyframes ringPulse {
+  0%,100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.04); opacity: 0.6; }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Bassam Aljazzar</div>
+  <div class="nav-links">
+    <a href="#journey" data-en="Journey" data-ar="المسيرة">Journey</a>
+    <a href="#government" data-en="Gov. Projects" data-ar="المشاريع">Gov. Projects</a>
+    <a href="#exhibitions" data-en="Exhibitions" data-ar="المعارض">Exhibitions</a>
+    <a href="#contact" data-en="Contact" data-ar="تواصل">Contact</a>
+  </div>
+  <div class="nav-right">
+    <button class="lang-toggle" onclick="toggleLang()" id="langBtn">عربي</button>
+    <a href="/cdn-cgi/l/email-protection#ec8eb38d80868d96968d9eac958d848383c28f8381" class="nav-cta" data-en="Contact" data-ar="تواصل">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-photo-wrap">
+    <div class="hero-photo-ring2"></div>
+    <div class="hero-photo-ring"></div>
+    <img class="hero-photo" src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/myPhoto.png" alt="Bassam Aljazzar">
+  </div>
+    <div class="hero-eyebrow" data-en="Innovation Portfolio · 2026" data-ar="ملف الابتكار · 2026">Innovation Portfolio · 2026</div>
+  <h1 class="hero-name">Bassam<br>Aljazzar</h1>
+  <p class="hero-title" data-en="Lead AI & Mechatronics Systems Engineer · US Patent Holder · UAE Registered Industrial Design<br>From Gaza to UAE Government Innovation Labs" data-ar="مهندس أنظمة ذكاء اصطناعي وميكاترونكس · حامل براءة اختراع أمريكية · نموذج صناعي مسجّل إماراتياً<br>من غزة إلى مختبرات الابتكار الحكومية في الإمارات">Lead AI & Mechatronics Systems Engineer · US Patent Holder · UAE Registered Industrial Design<br>From Gaza to UAE Government Innovation Labs</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">8+</div><div class="stat-label" data-en="Years" data-ar="سنوات">Years</div></div>
+    <div class="stat"><div class="stat-num">1+1</div><div class="stat-label" data-en="Patent + Design" data-ar="براءة + تصميم">Patent + Design</div></div>
+    <div class="stat"><div class="stat-num">8</div><div class="stat-label" data-en="Gov. Projects" data-ar="مشاريع حكومية">Gov. Projects</div></div>
+    <div class="stat"><div class="stat-num">2</div><div class="stat-label" data-en="Field Pilots" data-ar="تجارب ميدانية">Field Pilots</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-label" data-en="Int'l Exhibitions" data-ar="معارض دولية">Int'l Exhibitions</div></div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><div class="scroll-text" data-en="Scroll" data-ar="للأسفل">Scroll</div></div>
+</section>
+
+<section id="journey" style="background:linear-gradient(180deg,var(--bg) 0%,var(--ink) 100%);">
+<div class="section-inner">
+  <div class="section-eyebrow"><span data-en="The Journey" data-ar="المسيرة">The Journey</span></div>
+  <h2 class="section-heading" data-en="From Gaza to Innovation" data-ar="من غزة إلى الابتكار">From Gaza to Innovation</h2>
+  <div class="timeline">
+
+    <div class="era" data-delay="0">
+      <div class="era-dot"></div>
+      <div class="era-year">2011 — 2017</div>
+      <h3 class="era-title" data-en="The Foundation" data-ar="الأساس">The Foundation</h3>
+      <div class="era-sub" data-en="Al-Azhar University — Gaza, Palestine" data-ar="جامعة الأزهر — غزة، فلسطين">Al-Azhar University — Gaza, Palestine</div>
+      <p class="era-text" data-en="BSc Mechatronics Engineering. Graduation project: Shrimp Rover — 6-wheel independent-motor robot for obstacle traversal. Built with limited resources in Gaza. First proof of engineering under constraints." data-ar="بكالوريوس هندسة الميكاترونكس. مشروع التخرج Shrimp Rover — روبوت بست عجلات مستقلة لتجاوز العوائق. بُني بإمكانيات محدودة في غزة. أول برهان على الهندسة تحت القيود.">BSc Mechatronics Engineering. Graduation project: Shrimp Rover — 6-wheel independent-motor robot for obstacle traversal. Built with limited resources in Gaza. First proof of engineering under constraints.</p>
+      <div class="img-2col">
+        <div class="img-frame" onclick="lb(this)"><img src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/shrimpRover_real.jpg" alt="Shrimp Rover"></div>
+        <div class="img-frame" onclick="lb(this)"><img src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/shrimpRover_Sim.png" alt="Shrimp Rover Sim"></div>
+      </div>
+      <a href="https://www.academia.edu/32583980/Graduation_research_about_Shrimp_Rover_Robot" target="_blank" style="font-family:var(--mono);font-size:10px;color:var(--sky);text-decoration:none;">↗ Research Paper — Academia.edu</a>
+      <div class="tags"><span class="tag tg">Mechatronics</span><span class="tag tg">Robotics</span><span class="tag tsk" data-en="Al-Azhar University" data-ar="جامعة الأزهر">Al-Azhar University</span></div>
+    </div>
+
+    <div class="era" data-delay="100">
+      <div class="era-dot"></div>
+      <div class="era-year">2019 — 2021</div>
+      <h3 class="era-title" data-en="The Breakthrough" data-ar="نقطة التحول">The Breakthrough</h3>
+      <div class="era-sub" data-en="UAE University, College of IT — Al Ain, UAE" data-ar="جامعة الإمارات، كلية تقنية المعلومات — العين">UAE University, College of IT — Al Ain, UAE</div>
+      <p class="era-text" data-en="Three milestones that defined the career: Bu Saif Humanoid Robot at GITEX 2019, Meta Touch touchless elevator commercially deployed across UAE institutions, and the US Patent for EMG-based communication mask." data-ar="ثلاثة إنجازات شكّلت المسيرة: روبوت بو سيف الإنساني في GITEX 2019، Meta Touch المنتشر تجارياً في مؤسسات إماراتية، وبراءة الاختراع الأمريكية لقناع التواصل الصامت.">Three milestones that defined the career: Bu Saif Humanoid Robot at GITEX 2019, Meta Touch touchless elevator commercially deployed across UAE institutions, and the US Patent for EMG-based communication mask.</p>
+
+      <div style="font-family:var(--mono);font-size:10px;color:var(--sky);letter-spacing:2px;margin-bottom:10px;">BU SAIF HUMANOID ROBOT — GITEX 2019 + DHA MOU</div>
+      <div class="img-2col">
+        <div class="img-frame" onclick="lb(this)"><img src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/busaif_1.jpg" alt="Bu Saif GITEX"></div>
+        <div class="img-frame" onclick="lb(this)"><img src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/busaif_2.jpg" alt="Bu Saif Lab"></div>
+      </div>
+
+      <div style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:2px;margin:16px 0 10px;">META TOUCH — COMMERCIAL PRODUCT · UAE MARKET</div>
+      <div class="img-2col">
+        <div class="img-frame" onclick="lb(this)"><img src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/metaTouch_1.jpg" alt="Meta Touch"></div>
+        <div class="img-frame" onclick="lb(this)"><img src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/metaTouch_2.jpg" alt="Meta Touch Installed"></div>
+      </div>
+      <a href="https://metatouchtechcom.wordpress.com" target="_blank" style="font-family:var(--mono);font-size:10px;color:var(--sky);text-decoration:none;">↗ metatouchtechcom.wordpress.com</a>
+
+      <div style="font-family:var(--mono);font-size:10px;color:var(--purple);letter-spacing:2px;margin:16px 0 10px;">US PATENT No. 11,573,635 — FEB 2023</div>
+      <div class="img-2col">
+        <div class="img-frame" onclick="lb(this)"><img src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/Patent_1.jpg" alt="Patent 1"></div>
+        <div class="img-frame" onclick="lb(this)"><img src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/Patent_2.jpg" alt="Patent 2"></div>
+      </div>
+      <a href="https://patentimages.storage.googleapis.com/73/15/54/9ddd67aef63072/US11573635.pdf" target="_blank" style="font-family:var(--mono);font-size:10px;color:var(--purple);text-decoration:none;">↗ View Patent PDF</a>
+
+      <div class="tags" style="margin-top:16px;">
+        <span class="tag tpu">US Patent US11573635</span>
+        <span class="tag tg">GITEX 2019</span>
+        <span class="tag tgo" data-en="DHA MOU" data-ar="مذكرة تفاهم مع هيئة الصحة بدبي">DHA MOU</span>
+        <span class="tag tgo" data-en="Commercial — UAE Market" data-ar="منتج تجاري في الإمارات">Commercial — UAE Market</span>
+      </div>
+    </div>
+
+    <div class="era" data-delay="200">
+      <div class="era-dot"></div>
+      <div class="era-year">2021 — Present</div>
+      <h3 class="era-title" data-en="Leading Government Innovation" data-ar="قيادة الابتكار الحكومي">Leading Government Innovation</h3>
+      <div class="era-sub" data-en="MOI Manufacturing Innovation Lab — UAE Ministry of Interior, Abu Dhabi" data-ar="مختبر الابتكار التصنيعي — وزارة الداخلية الإماراتية، أبوظبي">MOI Manufacturing Innovation Lab — UAE Ministry of Interior, Abu Dhabi</div>
+      <p class="era-text" data-en="Primary technical lead for AI and mechatronic innovation at the MOI Innovation Lab. 8 government-published projects. 2 systems in active field pilots with UAE police. Represented MOI at 5 international security exhibitions. UAE Industrial Design Patent (Driver Behavior Monitoring Device). Certificate of Appreciation from H.H. Sheikh Saif bin Zayed for contributing to the Mohammed bin Rashid Government Excellence Award — 7th Edition." data-ar="القائد التقني الرئيسي للابتكار في مختبر وزارة الداخلية. 8 مشاريع منشورة حكومياً. نظامان في تجريب ميداني فعلي مع الشرطة الإماراتية. ممثّل الوزارة في 5 معارض أمنية دولية. براءة نموذج صناعي إماراتية (جهاز رصد سلوك السائقين). شهادة شكر من سمو الفريق سيف بن زايد للمساهمة في جائزة محمد بن راشد للأداء الحكومي المتميز — الدورة السابعة.">Primary technical lead for AI and mechatronic innovation at the MOI Innovation Lab. 8 government-published projects. 2 systems in active field pilots with UAE police. Represented MOI at 5 international security exhibitions. UAE Industrial Design Patent (Driver Behavior Monitoring Device). Certificate of Appreciation from H.H. Sheikh Saif bin Zayed for contributing to the Mohammed bin Rashid Government Excellence Award — 7th Edition.</p>
+
+      <div style="font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:10px;">✅ FIELD PILOT — LEO ROVER · UAE EXPLOSIVES POLICE</div>
+      <div class="img-2col">
+        <div class="img-frame" onclick="lb(this)"><img src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/Land-Rover.PNG" alt="Leo Rover"></div>
+        <div class="img-frame" onclick="lb(this)"><img src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/Land-Rover_underCar.jpg" alt="Under Car Inspection"></div>
+      </div>
+
+      <div style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:2px;margin:16px 0 10px;" data-en="PATENTS · AWARDS · RECOGNITION" data-ar="براءات الاختراع · الجوائز · التكريم">PATENTS · AWARDS · RECOGNITION</div>
+      <div class="certs-grid">
+        <div class="cert-card" onclick="lb(this)">
+          <div class="cert-img"><img src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/indastrialCertificate.jpeg" alt="Industrial Design Patent"></div>
+          <div class="cert-body">
+            <div style="display:inline-block;padding:3px 10px;border-radius:20px;background:rgba(192,132,252,.08);border:1px solid rgba(192,132,252,.2);color:var(--purple);font-family:var(--mono);font-size:9px;letter-spacing:1px;" data-en="UAE REGISTERED INDUSTRIAL DESIGN" data-ar="نموذج صناعي مسجّل إماراتياً">UAE REGISTERED INDUSTRIAL DESIGN</div>
+            <div class="cert-title" data-en="Driver Behavior Monitoring Device — Registered Industrial Design" data-ar="جهاز رصد سلوك السائقين — نموذج صناعي مسجّل">Driver Behavior Monitoring Device — Registered Industrial Design</div>
+            <div class="cert-desc" data-en="Design No. 12126 · IP-2025-00588 · Registered 17-09-2025 · Owner: MOI · Designer: Bassam W H Aljazzar (Industrial Design Registration — not a utility patent)" data-ar="رقم التصميم: 12126 · IP-2025-00588 · تاريخ المنح: 17-09-2025 · المالك: وزارة الداخلية · المصمم: بسام وليد الجزار (تسجيل نموذج صناعي)">Design No. 12126 · IP-2025-00588 · Registered 17-09-2025 · Owner: Ministry of Interior · Designer: Bassam W H Aljazzar</div>
+          </div>
+        </div>
+        <div class="cert-card" onclick="lb(this)">
+          <div class="cert-img"><img src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/moiCertificate.jpeg" alt="MOI Certificate"></div>
+          <div class="cert-body">
+            <div style="display:inline-block;padding:3px 10px;border-radius:20px;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);color:var(--gold);font-family:var(--mono);font-size:9px;letter-spacing:1px;" data-en="MOI CERTIFICATE OF APPRECIATION" data-ar="شهادة شكر وتقدير من وزارة الداخلية">MOI CERTIFICATE OF APPRECIATION</div>
+            <div class="cert-title" data-en="Mohammed bin Rashid Award — Government Excellence" data-ar="جائزة محمد بن راشد للأداء الحكومي المتميز">Mohammed bin Rashid Award — Government Excellence</div>
+            <div class="cert-desc" data-en="Signed by H.H. Lieutenant General Sheikh Saif bin Zayed Al Nahyan, Deputy PM & Minister of Interior — 7th Edition, September 2025" data-ar="موقّعة من سمو الفريق سيف بن زايد آل نهيان، نائب رئيس مجلس الوزراء ووزير الداخلية — الدورة السابعة، سبتمبر 2025">Signed by H.H. Lieutenant General Sheikh Saif bin Zayed Al Nahyan, Deputy PM & Minister of Interior — 7th Edition, September 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tags" style="margin-top:16px;">
+        <span class="tag tg" data-en="8 Gov. Published Innovations" data-ar="8 ابتكارات منشورة حكومياً">8 Gov. Published Innovations</span>
+        <span class="tag tsk" data-en="2 Active Field Pilots" data-ar="نظامان في تجريب ميداني">2 Active Field Pilots</span>
+        <span class="tag tgo" data-en="GInI Accredited Lab" data-ar="مختبر معتمد من GInI">GInI Accredited Lab</span>
+        <span class="tag tpu" data-en="UAE Registered Industrial Design" data-ar="نموذج صناعي مسجّل إماراتياً">UAE Registered Industrial Design</span>
+        <span class="tag tgo" data-en="MBR Gov. Excellence Award" data-ar="جائزة محمد بن راشد">MBR Gov. Excellence Award</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<section id="government" style="background:var(--ink);">
+<div class="section-inner">
+  <div class="section-eyebrow"><span data-en="UAE Ministry of Interior · Think10X" data-ar="وزارة الداخلية الإماراتية · Think10X">UAE Ministry of Interior · Think10X</span></div>
+  <h2 class="section-heading" data-en="8 Government-Published<br>Innovation Projects" data-ar="8 مشاريع ابتكارية<br>منشورة حكومياً">8 Government-Published<br>Innovation Projects</h2>
+  <div class="t10-grid">
+
+    <div class="t10-card" data-delay="0" style="border-color:rgba(0,212,170,.3);">
+      <div class="t10-img"><img src="https://think10x.moi.gov.ae/SharedImages/638549052661729543-Smart Scooter Patrol.jpeg" alt="BiSOS"></div>
+      <div class="t10-body">
+        <div class="pilot-badge">✅ FIELD PILOT — UAE COMMUNITY POLICE</div>
+        <div class="t10-id">THINK10X · #25 · 2023</div>
+        <div class="t10-name">BiSOS — Smart Scooter Patrol</div>
+        <div class="t10-desc" data-en="ESP32 collision detection for police e-bike officers. 10-second auto-alert to ambulance operations room with GPS coordinates." data-ar="كشف اصطدام ESP32 لضباط الدراجات الكهربائية. تنبيه تلقائي لغرفة الإسعاف خلال 10 ثوانٍ مع إحداثيات GPS.">ESP32 collision detection for police e-bike officers. 10-second auto-alert to ambulance operations room with GPS coordinates.</div>
+        <a class="t10-link" href="https://think10x.moi.gov.ae/Home/InnovativeProjectDetails?id=25" target="_blank">↗ think10x.moi.gov.ae</a>
+      </div>
+    </div>
+
+    <div class="t10-card" data-delay="80" style="border-color:rgba(0,212,170,.3);">
+      <div class="t10-img"><img src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/Land-Rover_underCar.jpg" alt="Leo Rover"></div>
+      <div class="t10-body">
+        <div class="pilot-badge">✅ FIELD PILOT — UAE EXPLOSIVES POLICE</div>
+        <div class="t10-id">MOI INNOVATION LAB · 2025</div>
+        <div class="t10-name">Leo Rover — Under-Car Inspection</div>
+        <div class="t10-desc" data-en="Robotic platform for vehicle under-body scanning. Delivered to UAE Explosives Police for active field use. Arabic PyQt5 GUI + ROS + Steam Deck control." data-ar="روبوت فحص تحت المركبات. مسلَّم لشرطة المتفجرات للاستخدام الميداني الفعلي. واجهة PyQt5 عربية + ROS + تحكم Steam Deck.">Robotic platform for vehicle under-body scanning. Delivered to UAE Explosives Police for active field use. Arabic PyQt5 GUI + ROS + Steam Deck control.</div>
+      </div>
+    </div>
+
+    <div class="t10-card" data-delay="160">
+      <div class="t10-img"><img src="https://think10x.moi.gov.ae/SharedImages/638549011010795631-منصة الفحص الذكية.png" alt="Smart Inspection"></div>
+      <div class="t10-body">
+        <div class="t10-id">THINK10X · #20 · 2024</div>
+        <div class="t10-name">Smart Inspection Platform</div>
+        <div class="t10-desc" data-en="Mobile multi-camera POC for rapid hazardous object detection at temporary field events and checkpoints." data-ar="منصة كاميرات متنقلة للكشف السريع عن الأجسام الخطرة في الفعاليات المؤقتة.">Mobile multi-camera POC for rapid hazardous object detection at temporary field events and checkpoints.</div>
+        <a class="t10-link" href="https://think10x.moi.gov.ae/Home/InnovativeProjectDetails?id=20" target="_blank">↗ think10x.moi.gov.ae</a>
+      </div>
+    </div>
+
+    <div class="t10-card" data-delay="0">
+      <div class="t10-img"><img src="https://think10x.moi.gov.ae/SharedImages/638549011309728343-مستودع الأدلة الجنائية الذكي.png" alt="Forensic"></div>
+      <div class="t10-body">
+        <div class="t10-id">THINK10X · #21 · 2024</div>
+        <div class="t10-name">Intelligent Forensic Repository</div>
+        <div class="t10-desc" data-en="Secure chain-of-custody system for criminal evidence — authorized access only, preventing loss or tampering." data-ar="نظام سلسلة حيازة آمنة للأدلة الجنائية — وصول للمخوّلين فقط، يمنع الضياع أو التلاعب.">Secure chain-of-custody system for criminal evidence — authorized access only, preventing loss or tampering.</div>
+        <a class="t10-link" href="https://think10x.moi.gov.ae/Home/InnovativeProjectDetails?id=21" target="_blank">↗ think10x.moi.gov.ae</a>
+      </div>
+    </div>
+
+    <div class="t10-card" data-delay="80">
+      <div class="t10-img"><img src="https://think10x.moi.gov.ae/SharedImages/638549011755992708-Smart traffic intersection project.png" alt="Traffic"></div>
+      <div class="t10-body">
+        <div class="t10-id">THINK10X · #22 · 2024</div>
+        <div class="t10-name">Smart Traffic Intersection</div>
+        <div class="t10-desc" data-en="Additional AI-triggered warning signal at intersections to increase driver alertness and reduce accidents." data-ar="إشارة تحذيرية مُشغَّلة بالذكاء الاصطناعي عند التقاطعات لرفع انتباه السائقين وتقليل الحوادث.">Additional AI-triggered warning signal at intersections to increase driver alertness and reduce accidents.</div>
+        <a class="t10-link" href="https://think10x.moi.gov.ae/Home/InnovativeProjectDetails?id=22" target="_blank">↗ think10x.moi.gov.ae</a>
+      </div>
+    </div>
+
+    <div class="t10-card" data-delay="160">
+      <div class="t10-img"><img src="https://think10x.moi.gov.ae/SharedImages/638549055214948770-Mobile Insurance System .jpeg" alt="Perimeter"></div>
+      <div class="t10-body">
+        <div class="t10-id">THINK10X · #23 · 2024</div>
+        <div class="t10-name">Autonomous Perimeter Security</div>
+        <div class="t10-desc" data-en="AI breach detection that auto-launches a drone, tracks the intruder and relays image + GPS to operations room in real time." data-ar="كشف اقتحام يطلق طائرة تلقائياً لتتبع المتسلل وإرسال صورته وإحداثياته لغرفة العمليات فوراً.">AI breach detection that auto-launches a drone, tracks the intruder and relays image + GPS to operations room in real time.</div>
+        <a class="t10-link" href="https://think10x.moi.gov.ae/Home/InnovativeProjectDetails?id=23" target="_blank">↗ think10x.moi.gov.ae</a>
+      </div>
+    </div>
+
+    <div class="t10-card" data-delay="0">
+      <div class="t10-img"><img src="https://think10x.moi.gov.ae/SharedImages/638549052107633532-درون إشارة المرور الذكية.jpeg" alt="Traffic Drone"></div>
+      <div class="t10-body">
+        <div class="t10-id">THINK10X · #24 · 2024</div>
+        <div class="t10-name">Smart Traffic Signal Drone</div>
+        <div class="t10-desc" data-en="Drone that regulates traffic by controlling the signal below — managed remotely from operations room or on-site officers." data-ar="طائرة تتحكم بإشارة المرور أسفلها — تُدار من غرفة العمليات أو ضباط الموقع.">Drone that regulates traffic by controlling the signal below — managed remotely from operations room or on-site officers.</div>
+        <a class="t10-link" href="https://think10x.moi.gov.ae/Home/InnovativeProjectDetails?id=24" target="_blank">↗ think10x.moi.gov.ae</a>
+      </div>
+    </div>
+
+    <div class="t10-card" data-delay="80">
+      <div class="t10-img"><img src="https://think10x.moi.gov.ae/SharedImages/638549103392307094-Electronic Shooting System.png" alt="Shooting"></div>
+      <div class="t10-body">
+        <div class="t10-id">THINK10X · #34 · 2023</div>
+        <div class="t10-name">Electronic Shooting Trainer</div>
+        <div class="t10-desc" data-en="Laser marksmanship system with custom-invented LDR sensor array (10–15cm radius). Automated performance evaluation for live-shooting qualification." data-ar="جهاز تدريب رماية بالليزر مع مصفوفة LDR مخترَعة (10-15 سم). تقييم أداء تلقائي للتأهيل للرماية الحية.">Laser marksmanship system with custom-invented LDR sensor array (10–15cm radius). Automated performance evaluation for live-shooting qualification.</div>
+        <a class="t10-link" href="https://think10x.moi.gov.ae/Home/InnovativeProjectDetails?id=34" target="_blank">↗ think10x.moi.gov.ae</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<section id="exhibitions" style="background:var(--bg);">
+<div class="section-inner">
+  <div class="section-eyebrow"><span data-en="International Presence" data-ar="الحضور الدولي">International Presence</span></div>
+  <h2 class="section-heading" data-en="Representing MOI<br>on the World Stage" data-ar="تمثيل وزارة الداخلية<br>على الساحة الدولية">Representing MOI<br>on the World Stage</h2>
+  <div class="exh-logos">
+    <img src="https://moi.gov.ae/DataFolder/2018news/february/751398222222222.jpg" alt="UAE MOI" onerror="this.style.display='none'">
+    <div style="width:1px;height:50px;background:var(--border);"></div>
+    <img src="https://worldpolicesummit.com/wp-content/uploads/2025/02/Home-Award-Logo-Image-2.webp" alt="World Police Summit" onerror="this.style.display='none'">
+    <div style="flex:1;font-family:var(--arabic);font-size:13px;color:var(--muted);line-height:1.8;" data-en="5 major international security exhibitions in 4 years — representing MOI Innovation Lab to global law enforcement from 138+ countries." data-ar="5 فعاليات أمنية دولية في 4 سنوات — تمثيل مختبر ابتكار وزارة الداخلية أمام قادة أمن دوليين من 138+ دولة.">5 major international security exhibitions in 4 years — representing MOI Innovation Lab to global law enforcement from 138+ countries.</div>
+  </div>
+  <div class="exh-grid">
+    <div class="exh-card" data-delay="0"><div class="exh-year-block"><div class="exh-year-num">2022</div><div class="exh-month">OCT</div></div><div><div class="exh-name">ISNR Abu Dhabi 2022</div><div class="exh-venue">ADNEC · 10–12 Oct 2022</div><div class="exh-desc" data-en="International Exhibition for National Security & Resilience." data-ar="المعرض الدولي للأمن الوطني والصمود.">International Exhibition for National Security & Resilience.</div></div></div>
+    <div class="exh-card" data-delay="60"><div class="exh-year-block"><div class="exh-year-num">2023</div><div class="exh-month">MAR</div></div><div><div class="exh-name">World Police Summit 2023</div><div class="exh-venue">DWTC · Dubai</div><div class="exh-desc" data-en="2nd edition. Dubai Police. FBI, NYPD, INTERPOL. 138 countries." data-ar="النسخة الثانية. شرطة دبي. FBI، NYPD، INTERPOL. 138 دولة.">2nd edition. Dubai Police. FBI, NYPD, INTERPOL. 138 countries.</div></div></div>
+    <div class="exh-card" data-delay="120"><div class="exh-year-block"><div class="exh-year-num">2024</div><div class="exh-month">MAY</div></div><div><div class="exh-name">ISNR Abu Dhabi 2024</div><div class="exh-venue">ADNEC · May 2024</div><div class="exh-desc" data-en="Largest edition: 210 exhibitors, 35 countries, 24,000 m²." data-ar="الأكبر: 210 عارض من 35 دولة، 24,000 م².">Largest edition: 210 exhibitors, 35 countries, 24,000 m².</div></div></div>
+    <div class="exh-card" data-delay="0"><div class="exh-year-block"><div class="exh-year-num">2024</div><div class="exh-month">MAR</div></div><div><div class="exh-name">World Police Summit 2024</div><div class="exh-venue">DWTC · Dubai</div><div class="exh-desc" data-en="3rd edition. H.H. Sheikh Mohammed bin Rashid patronage." data-ar="النسخة الثالثة. برعاية صاحب السمو الشيخ محمد بن راشد.">3rd edition. H.H. Sheikh Mohammed bin Rashid patronage.</div></div></div>
+    <div class="exh-card" data-delay="60"><div class="exh-year-block"><div class="exh-year-num">2025</div><div class="exh-month">MAY</div></div><div><div class="exh-name">World Police Summit 2025</div><div class="exh-venue">DWTC · 13–15 May 2025</div><div class="exh-desc" data-en="4th edition. 'Beyond the Badge: Envision the Next Era of Policing'." data-ar="النسخة الرابعة. Beyond the Badge.">4th edition. 'Beyond the Badge: Envision the Next Era of Policing'.</div></div></div>
+    <div class="exh-card upcoming" data-delay="120"><div class="exh-year-block"><div class="exh-year-num">2026</div><div class="exh-month">MAY</div></div><div><div class="exh-name">ISNR Abu Dhabi 2026</div><div class="exh-venue">ADNEC · 19–21 May 2026</div><div class="exh-desc" data-en="Presenting the Smart Security Vest AI wearable system." data-ar="عرض منظومة سترة الأمن الذكية.">Presenting the Smart Security Vest AI wearable system.</div><div style="margin-top:8px;display:inline-block;padding:3px 10px;border-radius:20px;background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.25);font-family:var(--mono);font-size:9px;color:var(--accent);">⚡ UPCOMING</div></div></div>
+  </div>
+</div>
+</section>
+
+<section id="contact" style="background:var(--ink);">
+<div class="section-inner" style="text-align:center;">
+  <div class="section-eyebrow" style="justify-content:center;"><span data-en="Get In Touch" data-ar="تواصل">Get In Touch</span></div>
+  <h2 class="section-heading" style="margin-bottom:48px;" data-en="Let's Build Something Real" data-ar="لنبني شيئاً حقيقياً">Let's Build Something Real</h2>
+  <div class="contact-grid">
+    <a href="tel:+971566113381" class="contact-card cc-g"><span style="font-size:22px;">📞</span><div><div class="contact-lbl">PHONE</div><div class="contact-val">+971 56 611 3381</div></div></a>
+    <a href="/cdn-cgi/l/email-protection#43211c222f292239392231033a222b2c2c6d202c2e" class="contact-card cc-s"><span style="font-size:22px;">✉️</span><div><div class="contact-lbl">EMAIL</div><div class="contact-val"><span class="__cf_email__" data-cfemail="15774a74797f746f6f7467556c747d7a7a3b767a78">[email&#160;protected]</span></div></div></a>
+    <a href="https://www.linkedin.com/in/bassam-aljazzar/" target="_blank" class="contact-card cc-s"><span style="font-size:22px;">💼</span><div><div class="contact-lbl">LINKEDIN</div><div class="contact-val">bassam-aljazzar</div></div></a>
+    <a href="https://github.com/bassamaljazzar93" target="_blank" class="contact-card cc-g"><span style="font-size:22px;">💻</span><div><div class="contact-lbl">GITHUB</div><div class="contact-val">bassamaljazzar93</div></div></a>
+    <a href="https://think10x.moi.gov.ae" target="_blank" class="contact-card cc-o"><span style="font-size:22px;">🏛</span><div><div class="contact-lbl">GOV. PROJECTS</div><div class="contact-val">think10x.moi.gov.ae</div></div></a>
+    <a href="https://patentimages.storage.googleapis.com/73/15/54/9ddd67aef63072/US11573635.pdf" target="_blank" class="contact-card cc-p"><span style="font-size:22px;">📜</span><div><div class="contact-lbl">US PATENT</div><div class="contact-val">No. 11,573,635</div></div></a>
+  </div>
+  <p style="margin-top:36px;font-family:var(--arabic);font-size:14px;color:var(--muted);" data-en="Abu Dhabi, UAE · Palestinian · Open to Senior Roles" data-ar="أبوظبي، الإمارات · فلسطيني · منفتح على الأدوار القيادية">Abu Dhabi, UAE · Palestinian · Open to Senior Roles</p>
+</div>
+</section>
+
+<footer style="border-top:1px solid var(--border);padding:36px;text-align:center;">
+  <div style="font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--sky));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;">Bassam Walid Aljazzar</div>
+  <div style="font-size:12px;color:var(--muted);font-family:var(--arabic);" data-en="Lead AI & Mechatronics Systems Engineer · US Patent Holder · UAE Registered Industrial Design · Abu Dhabi, UAE" data-ar="مهندس أنظمة ذكاء اصطناعي وميكاترونكس · حامل براءة اختراع أمريكية + نموذج صناعي مسجّل · أبوظبي، الإمارات">Lead AI & Mechatronics Systems Engineer · US Patent Holder · UAE Registered Industrial Design · Abu Dhabi, UAE</div>
+  <div style="margin-top:12px;font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:2px;">© 2026 · BASSAM ALJAZZAR</div>
+</footer>
+
+<div id="lb" onclick="this.classList.remove('show')"><img id="lbImg" src="" alt=""></div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+let isAR = false;
+function toggleLang() {
+  isAR = !isAR;
+  const root = document.getElementById('htmlRoot');
+  root.lang = isAR ? 'ar' : 'en';
+  root.dir = isAR ? 'rtl' : 'ltr';
+  document.getElementById('langBtn').textContent = isAR ? 'EN' : 'عربي';
+  document.querySelectorAll('[data-ar]').forEach(el => {
+    const val = isAR ? el.dataset.ar : el.dataset.en;
+    if (!val) return;
+    if (val.includes('<br>')) el.innerHTML = val;
+    else el.textContent = val;
+  });
+}
+
+// Add animate-ready class after page load so content is visible by default
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.era,.t10-card,.exh-card,.cert-card').forEach(el => {
+    el.classList.add('animate-ready');
+  });
+});
+
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const d = parseInt(e.target.dataset.delay || 0);
+      setTimeout(() => e.target.classList.add('visible'), d);
+      obs.unobserve(e.target);
+    }
+  });
+}, {threshold:.05, rootMargin:'0px 0px -50px 0px'});
+
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.era,.t10-card,.exh-card,.cert-card').forEach(el => obs.observe(el));
+});
+
+function lb(frame) {
+  const img = frame.querySelector('img');
+  if (!img) return;
+  document.getElementById('lbImg').src = img.src;
