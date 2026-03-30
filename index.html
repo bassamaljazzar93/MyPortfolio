@@ -106,6 +106,35 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .cc-p:hover{border-color:var(--purple);}
 .contact-lbl{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:2px;margin-bottom:2px;}
 .contact-val{font-size:13px;}
+
+.project-open{cursor:pointer;}
+.project-open .t10-img{position:relative;}
+.project-open .t10-img::after{content:"Tap to view";position:absolute;right:10px;bottom:10px;padding:5px 10px;border-radius:999px;background:rgba(4,7,13,.78);border:1px solid rgba(255,255,255,.08);color:var(--text);font-family:var(--mono);font-size:9px;letter-spacing:1px;opacity:.9}
+html[dir="rtl"] .project-open .t10-img::after{content:"اضغط للعرض";right:auto;left:10px;}
+#projectModal{display:none;position:fixed;inset:0;z-index:9500;background:rgba(0,0,0,.92);padding:24px;align-items:center;justify-content:center;}
+#projectModal.show{display:flex;}
+.project-modal-box{width:min(1100px,96vw);max-height:90vh;overflow:auto;background:var(--ink);border:1px solid var(--border);border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.45);}
+.project-modal-grid{display:grid;grid-template-columns:1.15fr .85fr;min-height:540px;}
+.project-gallery{padding:18px;border-right:1px solid var(--border);}
+html[dir="rtl"] .project-gallery{border-right:none;border-left:1px solid var(--border);}
+.project-stage{aspect-ratio:16/10;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+.project-stage img{width:100%;height:100%;object-fit:contain;background:#09111a;}
+.project-thumbs{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:10px;}
+.project-thumb{aspect-ratio:4/3;border-radius:12px;overflow:hidden;border:1px solid var(--border);background:var(--card);cursor:pointer;opacity:.82;transition:all .2s;}
+.project-thumb.active,.project-thumb:hover{opacity:1;border-color:var(--accent);transform:translateY(-1px);}
+.project-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.project-panel{padding:24px;display:flex;flex-direction:column;gap:14px;}
+.project-meta{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;}
+.project-title{font-size:30px;font-weight:800;line-height:1.15;}
+.project-desc{font-family:var(--arabic);font-size:15px;line-height:1.9;color:var(--text);}
+.project-counter{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
+.project-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto;}
+.project-btn{padding:10px 14px;border-radius:10px;text-decoration:none;border:1px solid var(--border);background:var(--card);color:var(--text);font-family:var(--mono);font-size:11px;letter-spacing:1px;cursor:pointer;}
+.project-btn:hover{border-color:var(--accent);color:var(--accent);}
+.project-close{position:sticky;top:0;float:right;margin:12px 12px 0 0;z-index:3}
+html[dir="rtl"] .project-close{float:left;margin:12px 0 0 12px;}
+@media(max-width:900px){.project-modal-grid{grid-template-columns:1fr;}.project-gallery{border-right:none;border-bottom:1px solid var(--border);}html[dir="rtl"] .project-gallery{border-left:none;border-bottom:1px solid var(--border);}}
+
 #lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:9000;align-items:center;justify-content:center;cursor:pointer;}
 #lb.show{display:flex;}
 #lbImg{max-width:92vw;max-height:90vh;object-fit:contain;border-radius:10px;}
@@ -403,11 +432,11 @@ html[dir="rtl"] .era.animate-ready.visible { transform: translateX(0) !important
 
 <section id="government" style="background:var(--ink);">
 <div class="section-inner">
-  <div class="section-eyebrow"><span data-en="UAE Ministry of Interior · Think10X" data-ar="وزارة الداخلية الإماراتية · Think10X">UAE Ministry of Interior · Think10X</span></div>
-  <h2 class="section-heading" data-en="8 Government-Published<br>Innovation Projects" data-ar="8 مشاريع ابتكارية<br>منشورة حكومياً">8 Government-Published<br>Innovation Projects</h2>
+  <div class="section-eyebrow"><span data-en="UAE Ministry of Interior · Innovation Projects & Systems" data-ar="وزارة الداخلية الإماراتية · مشاريع وأنظمة الابتكار">UAE Ministry of Interior · Innovation Projects & Systems</span></div>
+  <h2 class="section-heading" data-en="Selected Ministry Innovation<br>Projects & Field Systems" data-ar="نماذج من مشاريع الابتكار<br>والأنظمة الميدانية في الوزارة">Selected Ministry Innovation<br>Projects & Field Systems</h2>
   <div class="t10-grid">
 
-    <div class="t10-card" data-delay="0" style="border-color:rgba(0,212,170,.3);">
+    <div class="t10-card project-open" data-delay="0" style="border-color:rgba(0,212,170,.3);" onclick="openProject('bisos')">
       <div class="t10-img"><img src="https://think10x.moi.gov.ae/SharedImages/638549052661729543-Smart Scooter Patrol.jpeg" alt="BiSOS"></div>
       <div class="t10-body">
         <div class="pilot-badge">✅ FIELD PILOT — UAE COMMUNITY POLICE</div>
@@ -418,7 +447,7 @@ html[dir="rtl"] .era.animate-ready.visible { transform: translateX(0) !important
       </div>
     </div>
 
-    <div class="t10-card" data-delay="80" style="border-color:rgba(0,212,170,.3);">
+    <div class="t10-card project-open" data-delay="80" style="border-color:rgba(0,212,170,.3);" onclick="openProject('leo')">
       <div class="t10-img"><img src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/Land-Rover_underCar.jpg" alt="Leo Rover"></div>
       <div class="t10-body">
         <div class="pilot-badge">✅ FIELD PILOT — UAE EXPLOSIVES POLICE</div>
@@ -428,7 +457,27 @@ html[dir="rtl"] .era.animate-ready.visible { transform: translateX(0) !important
       </div>
     </div>
 
-    <div class="t10-card" data-delay="160">
+
+    <div class="t10-card project-open" data-delay="120" style="border-color:rgba(192,132,252,.28);" onclick="openProject('smartpolice')">
+      <div class="t10-img"><img src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAASportfolio/main/images/AiPoliceInv-1.png" alt="Smart Police Investigator Assistant"></div>
+      <div class="t10-body">
+        <div class="t10-id">MOI INNOVATION LAB · AI SYSTEM</div>
+        <div class="t10-name">Smart Police Investigator Assistant</div>
+        <div class="t10-desc" data-en="An AI-assisted investigation and accident-planning system that helps officers ask the right questions based on the case type, analyze accident images, and generate a structured report linked to the collected evidence." data-ar="نظام ذكي لمساندة المحقق أو مخطط الحوادث، يعتمد على الذكاء الاصطناعي ويرتبط بمساعد حواري لطرح الأسئلة اللازمة بحسب نوع الحالة، مع تحليل صور الحوادث وربطها بالتقرير النهائي بشكل منظم.">An AI-assisted investigation and accident-planning system that helps officers ask the right questions based on the case type, analyze accident images, and generate a structured report linked to the collected evidence.</div>
+      </div>
+    </div>
+
+    <div class="t10-card project-open" data-delay="160" style="border-color:rgba(192,132,252,.28);" onclick="openProject('driver')">
+      <div class="t10-img"><img src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAASportfolio/main/images/driverAtt-1.jpg" alt="Driver Behavior Monitoring Device"></div>
+      <div class="t10-body">
+        <div class="pilot-badge" style="background:rgba(192,132,252,.08);border-color:rgba(192,132,252,.25);color:var(--purple);">UAE REGISTERED INDUSTRIAL DESIGN</div>
+        <div class="t10-id">DESIGN NO. 12126 · IP-2025-00588</div>
+        <div class="t10-name">Driver Behavior Monitoring Device</div>
+        <div class="t10-desc" data-en="A driver-attention monitoring device registered in the UAE as an industrial design, developed to support the detection of unsafe driver behavior and strengthen road-safety awareness through an applied intelligent system concept." data-ar="جهاز لرصد سلوك السائق مسجل في دولة الإمارات كنموذج صناعي، طُوِّر لدعم اكتشاف السلوك غير الآمن أثناء القيادة وتعزيز السلامة المرورية من خلال مفهوم تطبيقي لنظام ذكي.">A driver-attention monitoring device registered in the UAE as an industrial design, developed to support the detection of unsafe driver behavior and strengthen road-safety awareness through an applied intelligent system concept.</div>
+      </div>
+    </div>
+
+    <div class="t10-card project-open" data-delay="160" onclick="openProject('inspection')">
       <div class="t10-img"><img src="https://think10x.moi.gov.ae/SharedImages/638549011010795631-منصة الفحص الذكية.png" alt="Smart Inspection"></div>
       <div class="t10-body">
         <div class="t10-id">THINK10X · #20 · 2024</div>
@@ -438,7 +487,7 @@ html[dir="rtl"] .era.animate-ready.visible { transform: translateX(0) !important
       </div>
     </div>
 
-    <div class="t10-card" data-delay="0">
+    <div class="t10-card project-open" data-delay="0" onclick="openProject('forensic')">
       <div class="t10-img"><img src="https://think10x.moi.gov.ae/SharedImages/638549011309728343-مستودع الأدلة الجنائية الذكي.png" alt="Forensic"></div>
       <div class="t10-body">
         <div class="t10-id">THINK10X · #21 · 2024</div>
@@ -448,7 +497,7 @@ html[dir="rtl"] .era.animate-ready.visible { transform: translateX(0) !important
       </div>
     </div>
 
-    <div class="t10-card" data-delay="80">
+    <div class="t10-card project-open" data-delay="80" onclick="openProject('trafficintersection')">
       <div class="t10-img"><img src="https://think10x.moi.gov.ae/SharedImages/638549011755992708-Smart traffic intersection project.png" alt="Traffic"></div>
       <div class="t10-body">
         <div class="t10-id">THINK10X · #22 · 2024</div>
@@ -458,7 +507,7 @@ html[dir="rtl"] .era.animate-ready.visible { transform: translateX(0) !important
       </div>
     </div>
 
-    <div class="t10-card" data-delay="160">
+    <div class="t10-card project-open" data-delay="160" onclick="openProject('perimeter')">
       <div class="t10-img"><img src="https://think10x.moi.gov.ae/SharedImages/638549055214948770-Mobile Insurance System .jpeg" alt="Perimeter"></div>
       <div class="t10-body">
         <div class="t10-id">THINK10X · #23 · 2024</div>
@@ -468,7 +517,7 @@ html[dir="rtl"] .era.animate-ready.visible { transform: translateX(0) !important
       </div>
     </div>
 
-    <div class="t10-card" data-delay="0">
+    <div class="t10-card project-open" data-delay="0" onclick="openProject('trafficdrone')">
       <div class="t10-img"><img src="https://think10x.moi.gov.ae/SharedImages/638549052107633532-درون إشارة المرور الذكية.jpeg" alt="Traffic Drone"></div>
       <div class="t10-body">
         <div class="t10-id">THINK10X · #24 · 2024</div>
@@ -478,7 +527,7 @@ html[dir="rtl"] .era.animate-ready.visible { transform: translateX(0) !important
       </div>
     </div>
 
-    <div class="t10-card" data-delay="80">
+    <div class="t10-card project-open" data-delay="80" onclick="openProject('shooting')">
       <div class="t10-img"><img src="https://think10x.moi.gov.ae/SharedImages/638549103392307094-Electronic Shooting System.png" alt="Shooting"></div>
       <div class="t10-body">
         <div class="t10-id">THINK10X · #34 · 2023</div>
@@ -494,7 +543,30 @@ html[dir="rtl"] .era.animate-ready.visible { transform: translateX(0) !important
 
 
 
+
+<div id="projectModal" onclick="closeProject(event)">
+  <div class="project-modal-box" onclick="event.stopPropagation()">
+    <button class="project-btn project-close" onclick="closeProject()" type="button">✕</button>
+    <div class="project-modal-grid">
+      <div class="project-gallery">
+        <div class="project-stage"><img id="projectStageImg" src="" alt=""></div>
+        <div class="project-thumbs" id="projectThumbs"></div>
+      </div>
+      <div class="project-panel">
+        <div class="project-meta" id="projectMeta"></div>
+        <div class="project-title" id="projectTitle"></div>
+        <div class="project-counter" id="projectCounter"></div>
+        <div class="project-desc" id="projectDesc"></div>
+        <div class="project-actions">
+          <a class="project-btn" id="projectLink" href="#" target="_blank" rel="noopener">Open source / reference</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <section id="contact" style="background:var(--ink);">
+
 <div class="section-inner" style="text-align:center;">
   <div class="section-eyebrow" style="justify-content:center;"><span data-en="Get In Touch" data-ar="تواصل">Get In Touch</span></div>
   <h2 class="section-heading" style="margin-bottom:48px;" data-en="Let's Build Something Meaningful" data-ar="لنبنِ شيئًا ذا قيمة">Let's Build Something Meaningful</h2>
@@ -532,6 +604,7 @@ function toggleLang() {
     if (val.includes('<br>')) el.innerHTML = val;
     else el.textContent = val;
   });
+  if (document.getElementById('projectModal')?.classList.contains('show') && currentProjectKey) renderProject();
 }
 
 // Add animate-ready class after page load so content is visible by default
@@ -568,6 +641,26 @@ function sendMail() {
   var d = 'yahoo.com';
   window.location.href = 'mailto:' + u + '@' + d;
 }
+
+
+const projectData = {
+  bisos: {meta:'THINK10X · #25 · 2023',title:{en:'BiSOS — Smart Scooter Patrol',ar:'BiSOS — الدورية الذكية للسكوتر'},desc:{en:'An ESP32-based safety system for police e-bikes and scooters that detects severe collisions, sends an automatic emergency alert within seconds, and shares GPS coordinates with the ambulance operations room. It was developed as a practical field safety solution and reached an active field pilot stage with the UAE Community Police.',ar:'نظام سلامة يعتمد على ESP32 مخصص للدراجات والسكوترات الشرطية، يرصد حالات الاصطدام الشديدة ويرسل تنبيهًا طارئًا تلقائيًا خلال ثوانٍ مع إحداثيات GPS إلى غرفة عمليات الإسعاف. طُوِّر كحل ميداني عملي للسلامة ووصل إلى مرحلة التجريب الميداني الفعلي مع الشرطة المجتمعية في الإمارات.'},link:'https://think10x.moi.gov.ae/Home/InnovativeProjectDetails?id=25',images:['https://think10x.moi.gov.ae/SharedImages/638549052661729543-Smart Scooter Patrol.jpeg']},
+  leo: {meta:'MOI INNOVATION LAB · 2025',title:{en:'Leo Rover — Under-Car Inspection',ar:'Leo Rover — فحص أسفل المركبات'},desc:{en:'A robotic inspection platform for scanning vehicle underbodies in the field. The system combines a mobile rover, Arabic operator interface, ROS integration, and remote control workflow to support real inspection use. It was delivered for active field use with the UAE Explosives Police.',ar:'منصة روبوتية لفحص أسفل المركبات ميدانيًا. يجمع النظام بين روبوت متحرك، وواجهة تشغيل عربية، وتكامل مع ROS، وسير عمل للتحكم عن بعد لدعم عمليات الفحص الحقيقية. وقد تم تسليمه للاستخدام الميداني الفعلي مع شرطة المتفجرات في الإمارات.'},link:'https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/Land-Rover_underCar.jpg',images:['https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/Land-Rover.PNG','https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/Land-Rover_underCar.jpg']},
+  smartpolice: {meta:'MOI INNOVATION LAB · AI SYSTEM',title:{en:'Smart Police Investigator Assistant',ar:'مساعد المحقق الشرطي الذكي'},desc:{en:'An AI-assisted investigation and accident-planning system designed to support investigators and report planners. It uses a chatbot-style flow to ask case-specific questions, analyzes accident images, and generates a structured report linked to the collected evidence and findings.',ar:'نظام ذكي لمساندة المحقق أو مخطط الحوادث، صُمم لدعم العمل التحقيقي وإعداد التقارير. يعتمد على مسار حواري ذكي لطرح الأسئلة المناسبة حسب نوع الحالة، ويحلل صور الحادث، ثم يولّد تقريرًا منظمًا مرتبطًا بالأدلة والنتائج التي تم جمعها.'},link:'https://github.com/bassamaljazzar93/BassamSAASportfolio/tree/main/images',images:['https://raw.githubusercontent.com/bassamaljazzar93/BassamSAASportfolio/main/images/AiPoliceInv-1.png','https://raw.githubusercontent.com/bassamaljazzar93/BassamSAASportfolio/main/images/AiPoliceInv-2.png','https://raw.githubusercontent.com/bassamaljazzar93/BassamSAASportfolio/main/images/AiPoliceInv-3.png']},
+  driver: {meta:'DESIGN NO. 12126 · IP-2025-00588',title:{en:'Driver Behavior Monitoring Device',ar:'جهاز رصد سلوك السائقين'},desc:{en:'A driver-attention and behavior monitoring concept registered in the UAE as an industrial design. The project focuses on supporting the detection of unsafe driving behavior and strengthening road-safety awareness through an applied intelligent system concept with a dedicated physical product form.',ar:'مفهوم لجهاز يراقب انتباه السائق وسلوكه أثناء القيادة، ومسجل في دولة الإمارات كنموذج صناعي. يركز المشروع على دعم اكتشاف السلوك غير الآمن وتعزيز السلامة المرورية من خلال مفهوم تطبيقي لنظام ذكي ضمن منتج مادي مخصص.'},link:'https://github.com/bassamaljazzar93/BassamSAASportfolio/tree/main/images',images:['https://raw.githubusercontent.com/bassamaljazzar93/BassamSAASportfolio/main/images/driverAtt-1.jpg','https://raw.githubusercontent.com/bassamaljazzar93/BassamSAASportfolio/main/images/driverAtt-2.jpg','https://raw.githubusercontent.com/bassamaljazzar93/BassamSAASportfolio/main/images/driverAtt-3.jpg','https://raw.githubusercontent.com/bassamaljazzar93/BassamSAASportfolio/main/images/driverAtt-4.jpg','https://raw.githubusercontent.com/bassamaljazzar93/BassamSAASportfolio/main/images/driverAtt-5.jpg']},
+  inspection: {meta:'THINK10X · #20 · 2024',title:{en:'Smart Inspection Platform',ar:'منصة الفحص الذكية'},desc:{en:'A mobile multi-camera proof of concept for rapid hazardous-object detection at temporary field events and checkpoints, designed to support flexible inspection deployment in dynamic field environments.',ar:'نموذج أولي متنقل متعدد الكاميرات للكشف السريع عن الأجسام الخطرة في الفعاليات الميدانية المؤقتة ونقاط التفتيش، صُمم لدعم نشر عمليات الفحص بمرونة في البيئات الميدانية المتغيرة.'},link:'https://think10x.moi.gov.ae/Home/InnovativeProjectDetails?id=20',images:['https://think10x.moi.gov.ae/SharedImages/638549011010795631-منصة الفحص الذكية.png']},
+  forensic: {meta:'THINK10X · #21 · 2024',title:{en:'Intelligent Forensic Repository',ar:'مستودع الأدلة الجنائية الذكي'},desc:{en:'A secure chain-of-custody concept for criminal evidence designed to restrict access to authorized personnel, preserve control over stored evidence, and reduce risks of loss or tampering.',ar:'مفهوم آمن لإدارة سلسلة حيازة الأدلة الجنائية، صُمم لحصر الوصول على الأشخاص المخولين، وتعزيز السيطرة على الأدلة المخزنة، وتقليل مخاطر الفقد أو التلاعب.'},link:'https://think10x.moi.gov.ae/Home/InnovativeProjectDetails?id=21',images:['https://think10x.moi.gov.ae/SharedImages/638549011309728343-مستودع الأدلة الجنائية الذكي.png']},
+  trafficintersection: {meta:'THINK10X · #22 · 2024',title:{en:'Smart Traffic Intersection',ar:'التقاطع المروري الذكي'},desc:{en:'An AI-triggered warning concept for intersections aimed at improving driver alertness and reducing accident risk through an additional intelligent warning mechanism.',ar:'مفهوم لإشارة تحذيرية مدعومة بالذكاء الاصطناعي عند التقاطعات، يهدف إلى رفع انتباه السائقين وتقليل مخاطر الحوادث من خلال آلية تحذير ذكية إضافية.'},link:'https://think10x.moi.gov.ae/Home/InnovativeProjectDetails?id=22',images:['https://think10x.moi.gov.ae/SharedImages/638549011755992708-Smart traffic intersection project.png']},
+  perimeter: {meta:'THINK10X · #23 · 2024',title:{en:'Autonomous Perimeter Security',ar:'الأمن المحيطي الذاتي'},desc:{en:'An AI-powered perimeter-security concept that detects breaches, automatically dispatches a drone, tracks the intruder, and relays images and GPS coordinates to the operations room in real time.',ar:'مفهوم أمني محيطي يعتمد على الذكاء الاصطناعي، يكشف الاقتحام ويطلق طائرة تلقائيًا لتتبع المتسلل وإرسال الصور والإحداثيات إلى غرفة العمليات بشكل لحظي.'},link:'https://think10x.moi.gov.ae/Home/InnovativeProjectDetails?id=23',images:['https://think10x.moi.gov.ae/SharedImages/638549055214948770-Mobile Insurance System .jpeg']},
+  trafficdrone: {meta:'THINK10X · #24 · 2024',title:{en:'Smart Traffic Signal Drone',ar:'درون إشارة المرور الذكية'},desc:{en:'A drone-based traffic-management concept in which the drone controls the traffic signal below and can be managed remotely from the operations room or by on-site officers.',ar:'مفهوم لإدارة المرور باستخدام طائرة تتحكم بإشارة المرور الموجودة أسفلها، ويمكن تشغيلها من غرفة العمليات أو من قبل ضباط الموقع.'},link:'https://think10x.moi.gov.ae/Home/InnovativeProjectDetails?id=24',images:['https://think10x.moi.gov.ae/SharedImages/638549052107633532-درون إشارة المرور الذكية.jpeg']},
+  shooting: {meta:'THINK10X · #34 · 2023',title:{en:'Electronic Shooting Trainer',ar:'نظام التدريب الإلكتروني للرماية'},desc:{en:'A laser marksmanship training system using a custom-designed LDR sensor array and automated performance evaluation to support live-fire qualification workflows.',ar:'نظام تدريب رماية بالليزر يستخدم مصفوفة LDR مصممة خصيصًا مع تقييم آلي للأداء لدعم مسارات التأهيل للرماية الحية.'},link:'https://think10x.moi.gov.ae/Home/InnovativeProjectDetails?id=34',images:['https://think10x.moi.gov.ae/SharedImages/638549103392307094-Electronic Shooting System.png']}
+};
+let currentProjectKey = null;
+let currentProjectIndex = 0;
+function openProject(key){currentProjectKey = key; currentProjectIndex = 0; renderProject(); document.getElementById('projectModal').classList.add('show'); document.body.style.overflow='hidden';}
+function closeProject(event){if(event && event.stopPropagation) event.stopPropagation(); document.getElementById('projectModal').classList.remove('show'); document.body.style.overflow='';}
+function renderProject(){const data = projectData[currentProjectKey]; if(!data) return; const isArabic = document.getElementById('htmlRoot').dir === 'rtl'; const title = isArabic ? data.title.ar : data.title.en; const desc = isArabic ? data.desc.ar : data.desc.en; document.getElementById('projectMeta').textContent = data.meta; document.getElementById('projectTitle').textContent = title; document.getElementById('projectDesc').textContent = desc; document.getElementById('projectLink').textContent = isArabic ? 'فتح المرجع / المصدر' : 'Open source / reference'; document.getElementById('projectLink').href = data.link; const stage = document.getElementById('projectStageImg'); stage.src = data.images[currentProjectIndex]; stage.alt = title; document.getElementById('projectCounter').textContent = (isArabic ? 'صورة ' : 'Image ') + (currentProjectIndex + 1) + ' / ' + data.images.length; const thumbs = document.getElementById('projectThumbs'); thumbs.innerHTML=''; data.images.forEach((src, idx) => { const btn = document.createElement('button'); btn.type='button'; btn.className='project-thumb' + (idx===currentProjectIndex ? ' active' : ''); btn.onclick = () => { currentProjectIndex = idx; renderProject(); }; const img = document.createElement('img'); img.src = src; img.alt = title + ' ' + (idx+1); btn.appendChild(img); thumbs.appendChild(btn); }); }
+window.addEventListener('keydown', (e) => { const modal = document.getElementById('projectModal'); if(!modal.classList.contains('show') || !currentProjectKey) return; const data = projectData[currentProjectKey]; if(e.key === 'Escape') closeProject(); if(e.key === 'ArrowRight'){ currentProjectIndex = (currentProjectIndex + 1) % data.images.length; renderProject(); } if(e.key === 'ArrowLeft'){ currentProjectIndex = (currentProjectIndex - 1 + data.images.length) % data.images.length; renderProject(); } });
 
 const glow = document.querySelector('.hero-glow');
 window.addEventListener('scroll', () => {
