@@ -73,7 +73,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .t10-link{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--accent);text-decoration:none;}
 .t10-link:hover{text-decoration:underline;}
 .pilot-badge{display:inline-block;padding:3px 10px;border-radius:20px;background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);font-family:var(--mono);font-size:9px;color:var(--accent);letter-spacing:1px;margin-bottom:8px;}
-.certs-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px;}
+.certs-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:24px;}
 .cert-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease,border-color .3s;cursor:pointer;}
 .cert-card.visible{opacity:1;transform:translateY(0);}
 .cert-card:hover{border-color:var(--gold);}
@@ -139,7 +139,7 @@ html[dir="rtl"] .project-close{float:left;margin:12px 0 0 12px;}
 #lb.show{display:flex;}
 #lbImg{max-width:92vw;max-height:90vh;object-fit:contain;border-radius:10px;}
 @media(max-width:640px){
-  nav{padding:12px 18px;} .nav-links{display:none;} .section-inner{padding:60px 18px;} .hero-stats{gap:24px;} .stat-num{font-size:28px;} .timeline{padding-right:28px;} .era-dot{right:-37px;} .img-2col,.certs-grid{grid-template-columns:1fr;}
+  nav{padding:12px 18px;} .nav-links{display:none;} .section-inner{padding:60px 18px;} .hero-stats{gap:24px;} .stat-num{font-size:28px;} .timeline{padding-right:28px;} .era-dot{right:-37px;} .img-2col{grid-template-columns:1fr;}.certs-grid{grid-template-columns:1fr;}
 }
 html[dir="rtl"] .timeline{padding-right:0;padding-left:48px;}
 html[dir="rtl"] .timeline::before{right:auto;left:0;}
@@ -353,6 +353,7 @@ html[dir="rtl"] .era.animate-ready.visible { transform: translateX(0) !important
         <div class="event-mini-title" data-en="Research & Conference Participation" data-ar="المشاركة البحثية والمؤتمرات">Research & Conference Participation</div>
         <div class="event-mini-text" data-en="I participated in the 5th Joint UAE Symposium on Social Robotics (JSSR2020) at UAE University on 3–4 February 2020 as part of my university-phase work in robotics and human-centered AI." data-ar="شاركتُ في الندوة الإماراتية المشتركة الخامسة للروبوتات الاجتماعية (JSSR2020) في جامعة الإمارات يومي 3 و4 فبراير 2020، ضمن عملي خلال المرحلة الجامعية في الروبوتات والذكاء الاصطناعي المتمحور حول الإنسان.">I participated in the 5th Joint UAE Symposium on Social Robotics (JSSR2020) at UAE University on 3–4 February 2020 as part of my university-phase work in robotics and human-centered AI.</div>
         <a class="source-link" href="https://conferences.uaeu.ac.ae/jssr2020/en/index.shtml" target="_blank">↗ JSSR2020 — UAE University</a>
+
       </div>
 
       <div class="tags" style="margin-top:16px;">
@@ -410,7 +411,7 @@ html[dir="rtl"] .era.animate-ready.visible { transform: translateX(0) !important
         <div class="exh-card visible" style="opacity:1;transform:none;"><div class="exh-year-block"><div class="exh-year-num">2025</div><div class="exh-month">MAY</div></div><div><div class="exh-name">World Police Summit 2025</div><div class="exh-venue">DWTC · 13–15 May 2025</div><div class="exh-desc" data-en="I represented the Ministry again at the 2025 summit, contributing to the visibility of AI- and mechatronics-driven policing innovation." data-ar="مثّلتُ الوزارة مجددًا في قمة 2025، وساهمتُ في إبراز ابتكارات العمل الشرطي المعتمدة على الذكاء الاصطناعي والميكاترونكس.">I represented the Ministry again at the 2025 summit, contributing to the visibility of AI- and mechatronics-driven policing innovation.</div></div></div>
       </div>
 
-      <div style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:2px;margin:16px 0 10px;" data-en="PATENTS · AWARDS · RECOGNITION" data-ar="براءات الاختراع · الجوائز · التكريم">PATENTS · AWARDS · RECOGNITION</div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:2px;margin:16px 0 10px;" data-en="PATENTS · AWARDS · CERTIFICATIONS" data-ar="براءات الاختراع · الجوائز · الشهادات">PATENTS · AWARDS · CERTIFICATIONS</div>
       <div class="certs-grid">
         <div class="cert-card" onclick="lb(this)">
           <div class="cert-img"><img src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/indastrialCertificate.jpeg" alt="Industrial Design Patent"></div>
@@ -428,6 +429,14 @@ html[dir="rtl"] .era.animate-ready.visible { transform: translateX(0) !important
             <div class="cert-desc" data-en="Signed by H.H. Lieutenant General Sheikh Saif bin Zayed Al Nahyan, Deputy PM & Minister of Interior — 7th Edition, September 2025" data-ar="موقّعة من سمو الفريق سيف بن زايد آل نهيان، نائب رئيس مجلس الوزراء ووزير الداخلية — الدورة السابعة، سبتمبر 2025">Signed by H.H. Lieutenant General Sheikh Saif bin Zayed Al Nahyan, Deputy PM & Minister of Interior — 7th Edition, September 2025</div>
           </div>
         </div>
+        <div class="cert-card" onclick="lb(this)">
+          <div class="cert-img"><img src="https://raw.githubusercontent.com/bassamaljazzar93/BassamSAAsportfolio/main/images/Bassam_Aljazzar_Government_Innovation_Framework_in_the_UAE_Innovation_Certificate.jpg" alt="IBTEKR Certificate" style="object-fit:contain;background:#fff;padding:10px;"></div>
+          <div class="cert-body">
+            <div style="display:inline-block;padding:3px 10px;border-radius:20px;background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.2);color:var(--accent);font-family:var(--mono);font-size:9px;letter-spacing:1px;" data-en="UAE GOVERNMENT INNOVATION — IBTEKR" data-ar="ابتكار حكومي إماراتي — منصة ابتكر">UAE GOVERNMENT INNOVATION — IBTEKR</div>
+            <div class="cert-title" data-en="UAE Government Innovation Framework" data-ar="إطار الابتكار الحكومي في دولة الإمارات">UAE Government Innovation Framework</div>
+            <div class="cert-desc" data-en="Mohammed Bin Rashid Centre for Government Innovation · IBTEKR Platform · April 11, 2026 · UAE national innovation strategy and public sector transformation." data-ar="مركز محمد بن راشد للابتكار الحكومي · منصة ابتكر · 11 أبريل 2026 · إطار الابتكار الحكومي الوطني في الإمارات.">Mohammed Bin Rashid Centre for Government Innovation · IBTEKR Platform · April 11, 2026</div>
+          </div>
+        </div>
       </div>
 
       <div class="tags" style="margin-top:16px;">
@@ -436,6 +445,7 @@ html[dir="rtl"] .era.animate-ready.visible { transform: translateX(0) !important
         <span class="tag tgo" data-en="GInI Accredited Lab" data-ar="مختبر معتمد من GInI">GInI Accredited Lab</span>
         <span class="tag tpu" data-en="UAE Registered Industrial Design" data-ar="نموذج صناعي مسجّل إماراتياً">UAE Registered Industrial Design</span>
         <span class="tag tgo" data-en="MBR Gov. Excellence Award" data-ar="جائزة محمد بن راشد">MBR Gov. Excellence Award</span>
+        <span class="tag tg" data-en="IBTEKR — Gov. Innovation Certified" data-ar="شهادة ابتكر — الابتكار الحكومي">IBTEKR — Gov. Innovation Certified</span>
       </div>
     </div>
 
@@ -604,6 +614,7 @@ html[dir="rtl"] .era.animate-ready.visible { transform: translateX(0) !important
 <div id="lb" onclick="this.classList.remove('show')"><img id="lbImg" src="" alt=""></div>
 
 <script>
+
 let isAR = false;
 function toggleLang() {
   isAR = !isAR;
@@ -679,6 +690,7 @@ const glow = document.querySelector('.hero-glow');
 window.addEventListener('scroll', () => {
   if (glow) glow.style.transform = `translateX(-50%) translateY(${window.scrollY*.25}px)`;
 },{passive:true});
+
 </script>
 </body>
 </html>
